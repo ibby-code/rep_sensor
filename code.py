@@ -7,7 +7,7 @@ import busio
 import microcontroller
 import adafruit_bno055
 
-LOOP_RATE = 1
+REFRESH_RATE_HZ = 10
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -35,8 +35,9 @@ def write_value(val, file = None, flush = False):
 def run_loop(file = None):
     activated = False
     switchValue = False
+    write_value('Accel:Gryo:Quarternion:LinearAccel:Gravity', file)
     while True:
-        time.sleep(LOOP_RATE)
+        time.sleep(1.0 / REFRESH_RATE_HZ)
         if not switchValue and switch.value:
             activated = not activated
             # start a new entry
@@ -46,7 +47,7 @@ def run_loop(file = None):
 
         if activated:
             pixel.fill(GREEN)    
-            write_value(f'Accel: {sensor.acceleration}', file, True)
+            write_value(f'{sensor.acceleration}:{sensor.gyro}:{sensor.quaternion}:{sensor.linear_acceleration}:{sensor.gravity}', file, True)
         else:
             pixel.fill(RED)
 
