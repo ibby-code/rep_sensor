@@ -11,6 +11,7 @@ REFRESH_RATE_HZ = 10
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
+BLUE = (0, 0, 255) 
 
 switch = digitalio.DigitalInOut(board.A1)
 pixel = neopixel.NeoPixel(board.NEOPIXEL, 1)
@@ -46,7 +47,7 @@ def run_loop(file = None):
         switchValue = switch.value
 
         if activated:
-            pixel.fill(GREEN)    
+            pixel.fill(GREEN) if file else pixel.fill(BLUE) 
             write_value(f'{sensor.acceleration}:{sensor.gyro}:{sensor.quaternion}:{sensor.linear_acceleration}:{sensor.gravity}', file, True)
         else:
             pixel.fill(RED)
