@@ -48,7 +48,7 @@ def run_loop(file = None):
 
         if activated:
             pixel.fill(GREEN) if file else pixel.fill(BLUE) 
-            write_value(f'{sensor.acceleration}:{sensor.gyro}:{sensor.quaternion}:{sensor.linear_acceleration}:{sensor.gravity}', file, True)
+            write_value(f'{sensor.acceleration}:{sensor.gyro}:{sensor.quaternion}:{sensor.linear_acceleration}:{sensor.gravity}\n', file, True)
         else:
             pixel.fill(RED)
 
