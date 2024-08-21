@@ -2,7 +2,7 @@ from ast import literal_eval
 from enum import Enum
 from statistics import variance
 
-DEFAULT_FILE = 'C:/Users/ibbya/Documents/recurse/rep_sensor/one_set_of_ten.txt'
+DEFAULT_FILE = 'C:/Users/ibbya/Documents/recurse/rep_sensor/recordings/one_set_of_ten.txt'
 
 class Column(Enum):
     Accel = 0
@@ -26,8 +26,11 @@ def load(filename):
             line_values = line.split(":")
             for i in range(len(line_values)):
                 # each value is a tuple of floats as a string
-                val = [float(x.strip("()\n")) for x in line_values[i].split(",")]
-                data[headers[i]].append(val)
+                try:
+                    val = [float(x.strip("()\n")) for x in line_values[i].split(",")]
+                    data[headers[i]].append(val)
+                except:
+                    print(line_values)
             line = f.readline()
         return data
 

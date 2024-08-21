@@ -43,7 +43,7 @@ def run_loop(file = None):
             # start a new entry
             if activated:
                 write_value('\n', file)
-                write_value('Accel:Gryo:Quarternion:LinearAccel:Gravity', file)
+                write_value('Accel:Gryo:Quarternion:LinearAccel:Gravity\n', file)
         switchValue = switch.value
 
         if activated:
