@@ -58,8 +58,7 @@ def is_turning_point(data, i):
     return is_min or is_max
 
 def rep_counting_algo(data, column):
-    print(column)
-    print(data.keys())
+    """Count any pair of turning points that have a distance over the threshold"""
     (axis, axis_data) = find_greatest_variance_axis(data[column])
     c = 0
     threshold = (max(axis_data) - min(axis_data))/2

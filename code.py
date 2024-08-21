@@ -7,7 +7,7 @@ import busio
 import microcontroller
 import adafruit_bno055
 
-REFRESH_RATE_HZ = 10
+REFRESH_RATE_HZ = 25 
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -36,7 +36,6 @@ def write_value(val, file = None, flush = False):
 def run_loop(file = None):
     activated = False
     switchValue = False
-    write_value('Accel:Gryo:Quarternion:LinearAccel:Gravity', file)
     while True:
         time.sleep(1.0 / REFRESH_RATE_HZ)
         if not switchValue and switch.value:
@@ -44,6 +43,7 @@ def run_loop(file = None):
             # start a new entry
             if activated:
                 write_value('\n', file)
+                write_value('Accel:Gryo:Quarternion:LinearAccel:Gravity', file)
         switchValue = switch.value
 
         if activated:
